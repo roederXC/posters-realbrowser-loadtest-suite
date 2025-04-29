@@ -70,9 +70,6 @@ public class Homepage
 				verify();
 			});
 		}
-
-        GeneralPage.switchToDe();
-        GeneralPage.switchToUs();
 	}	
 	
 	/**

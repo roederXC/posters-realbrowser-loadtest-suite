@@ -26,4 +26,29 @@ public class GeneralPage
 			$("#total-product-count").should(Condition.exactText(expectedCount));
 		});
 	}
+
+    public static void switchToUs()
+    {
+        Action.run("SwitchToUS", () ->
+        {
+            $("#show-locale-menu").hover();
+            $("#locale-menu [href*='US']").click();
+
+            // verify count
+            $("#show-locale-menu").should(Condition.exactText("en-US"));
+        });
+    }
+
+    public static void switchToDe()
+    {
+        Action.run("SwitchToDE", () ->
+        {
+
+            $("#show-locale-menu").hover();
+            $("#locale-menu [href*='DE']").click();
+
+            // verify count
+            $("#show-locale-menu").should(Condition.exactText("de-DE"));
+        });
+    }
 }
