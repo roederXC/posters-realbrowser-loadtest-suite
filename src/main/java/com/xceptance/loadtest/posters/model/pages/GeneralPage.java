@@ -28,10 +28,10 @@ public class GeneralPage implements PageInterface
     @Override
     public void validate()
     {
-        miniCart.validateComponent();
-        user.validateComponent();
-        navigation.validateComponent();
-        footer.validateComponent();
+        miniCart.validate();
+        user.validate();
+        navigation.validate();
+        footer.validate();
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.xceptance.loadtest.posters.model.components.general;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.xceptance.loadtest.api.components.Component;
+import com.xceptance.loadtest.api.components.SelenideComponent;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
  *
  * @author Xceptance Software Technologies
  */
-public class Navigation implements Component
+public class Navigation implements SelenideComponent
 {
     @Override
     public SelenideElement locate()
@@ -20,7 +20,7 @@ public class Navigation implements Component
     }
 
     @Override
-    public void validateComponent()
+    public void validate()
     {
         locate().should(Condition.exist);
     }

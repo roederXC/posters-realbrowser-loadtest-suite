@@ -2,7 +2,7 @@ package com.xceptance.loadtest.posters.model.components.general;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.xceptance.loadtest.api.components.Component;
+import com.xceptance.loadtest.api.components.SelenideComponent;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.pages.CartPage;
 
@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.$;
  *
  * @author Xceptance Software Technologies
  */
-public class MiniCart implements Component
+public class MiniCart implements SelenideComponent
 {
     @Override
     public SelenideElement locate()
@@ -24,7 +24,7 @@ public class MiniCart implements Component
     }
 
     @Override
-    public void validateComponent()
+    public void validate()
     {
         locate().should(Condition.exist);
     }

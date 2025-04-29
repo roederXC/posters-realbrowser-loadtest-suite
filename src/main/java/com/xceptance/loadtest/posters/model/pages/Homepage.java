@@ -1,8 +1,6 @@
 package com.xceptance.loadtest.posters.model.pages;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.Selenide;
 import com.xceptance.loadtest.api.util.Action;

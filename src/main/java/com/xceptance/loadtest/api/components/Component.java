@@ -1,6 +1,6 @@
 package com.xceptance.loadtest.api.components;
 
-import com.codeborne.selenide.SelenideElement;
+import org.junit.Assert;
 
 /**
  * Component interface.
@@ -11,20 +11,32 @@ import com.codeborne.selenide.SelenideElement;
  */
 public interface Component
 {
-    default boolean exists()
+    /**
+     * Check if this component exists on the page.
+     *
+     * @return true if this component exists
+     */
+    boolean exists();
+
+    /**
+     * Methods to make stack traces containing the failing component.
+     *
+     * @param message message to print
+     * @param value   value to check
+     */
+    default void assertTrue(final String message, final boolean value)
     {
-        return locate().exists();
+        Assert.assertTrue(message, value);
     }
 
     /**
-     * Locates the component at the current page.
+     * Methods to make stack traces containing the failing component.
      *
-     * @return A SelenideElement representing the component
+     * @param message message to print
+     * @param value   value to check
      */
-    SelenideElement locate();
-
-    /**
-     * Validates that a given component is currently available at the current page.
-     */
-    void validateComponent();
+    default void assertFalse(final String message, final boolean value)
+    {
+        Assert.assertFalse(message, value);
+    }
 }
