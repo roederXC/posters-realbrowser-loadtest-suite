@@ -1,6 +1,7 @@
-package com.xceptance.loadtest.posters.pages;
+package com.xceptance.loadtest.posters.model.pages;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.Selenide;
@@ -14,12 +15,14 @@ import com.xceptance.loadtest.api.util.Context;
  * @author rschwietzke
  *
  */
-public class Homepage 
+public class Homepage extends GeneralPage
 {
+    public static final String LOCATOR = "#main #carousel-sale";
+
 	/**
 	 * Opens the homepage, if authentication is needed, will take care of that as well
 	 */
-	public static void open()
+    public void open()
 	{
 		final String NAME = "OpenHomepage";
 		
@@ -80,15 +83,10 @@ public class Homepage
 	 * Every check requires cpu and memory, the more checks, the less scale you get out of a single node
 	 * in terms of concurrent users. Experiment with that.
 	 */
-	public static void verify()
+    public void verify()
 	{
-		// check header
-		$("#globalNavigation").exists();
-		
-		// mini cart must be 0
-		$(".header-cart-product-count").should(exactText("0"));
-		
-		// check footer
-		$("#footer").exists();
+        super.validate();
+
+        Selenide.$(LOCATOR).should(exist);
 	}
 }

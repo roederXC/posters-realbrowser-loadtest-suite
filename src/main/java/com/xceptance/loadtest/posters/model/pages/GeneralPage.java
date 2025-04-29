@@ -1,17 +1,45 @@
-package com.xceptance.loadtest.posters.pages;
+package com.xceptance.loadtest.posters.model.pages;
 
 import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.Condition;
+import com.xceptance.loadtest.api.pages.PageInterface;
 import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.posters.model.components.general.Footer;
+import com.xceptance.loadtest.posters.model.components.general.MiniCart;
+import com.xceptance.loadtest.posters.model.components.general.Navigation;
+import com.xceptance.loadtest.posters.model.components.general.User;
 
 /**
- * Contains everything doable on all page types.
+ * Contains everything doable on general page types.
  * 
- * @author rschwietzke
+ * @author Xceptance Software Technologies
  */
-public class GeneralPage 
+public class GeneralPage implements PageInterface
 {
+    public MiniCart miniCart = new MiniCart();
+
+    public User user = new User();
+
+    public Navigation navigation = new Navigation();
+
+    public Footer footer = new Footer();
+
+    @Override
+    public void validate()
+    {
+        miniCart.validateComponent();
+        user.validateComponent();
+        navigation.validateComponent();
+        footer.validateComponent();
+    }
+
+    @Override
+    public boolean is()
+    {
+        return miniCart.exists() && user.exists() && navigation.exists() && footer.exists();
+    }
+
 	public static void search(final String phrase, final String expectedCount)
 	{
 		Action.run("Search", () ->

@@ -1,7 +1,7 @@
 package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
-import com.xceptance.loadtest.posters.pages.Homepage;
+import com.xceptance.loadtest.posters.model.pages.Homepage;
 
 public class TVisit extends LoadTestCase
 {
@@ -12,6 +12,7 @@ public class TVisit extends LoadTestCase
     public void test()
     {
         // Loads the homepage and leave immediately
-    	Homepage.open();
+        Homepage homepage = new Homepage();
+        homepage.open();
     }
 }

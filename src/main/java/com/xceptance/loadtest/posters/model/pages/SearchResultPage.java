@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.posters.pages;
+package com.xceptance.loadtest.posters.model.pages;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
  * @author rschwietzke
  *
  */
-public class SearchResultPage 
+public class SearchResultPage extends GeneralPage
 {
 	/**
 	 * Check that the homepage is correct. This activity has to be in the action to get the failure

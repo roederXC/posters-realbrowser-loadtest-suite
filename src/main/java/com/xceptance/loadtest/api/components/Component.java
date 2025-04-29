@@ -11,6 +11,11 @@ import com.codeborne.selenide.SelenideElement;
  */
 public interface Component
 {
+    default boolean exists()
+    {
+        return locate().exists();
+    }
+
     /**
      * Locates the component at the current page.
      *

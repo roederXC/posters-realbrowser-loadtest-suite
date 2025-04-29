@@ -2,9 +2,9 @@ package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
-import com.xceptance.loadtest.posters.pages.GeneralPage;
-import com.xceptance.loadtest.posters.pages.Homepage;
-import com.xceptance.loadtest.posters.pages.SearchResultPage;
+import com.xceptance.loadtest.posters.model.pages.GeneralPage;
+import com.xceptance.loadtest.posters.model.pages.Homepage;
+import com.xceptance.loadtest.posters.model.pages.SearchResultPage;
 
 public class TSearch extends LoadTestCase
 {
@@ -16,7 +16,8 @@ public class TSearch extends LoadTestCase
     {
     	// loads the homepage, data needed is taking from the properties automatically
     	// using the Context as well as the attached configuration.
-    	Homepage.open();
+        Homepage homepage = new Homepage();
+        homepage.open();
     	
     	// search, get some data first, feel free to replace the Tuple approach for the return 
     	// value if this seems to fancy or stubborn or is not needed

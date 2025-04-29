@@ -1,0 +1,27 @@
+package com.xceptance.loadtest.posters.model.components.general;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import com.xceptance.loadtest.api.components.Component;
+
+import static com.codeborne.selenide.Selenide.$;
+
+/**
+ * Navigation component (i.e. menu bar with categories).
+ *
+ * @author Xceptance Software Technologies
+ */
+public class Navigation implements Component
+{
+    @Override
+    public SelenideElement locate()
+    {
+        return $("#header-navigation-elements");
+    }
+
+    @Override
+    public void validateComponent()
+    {
+        locate().should(Condition.exist);
+    }
+}
