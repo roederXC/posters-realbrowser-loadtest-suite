@@ -9,6 +9,7 @@ import com.xceptance.loadtest.posters.model.components.general.Footer;
 import com.xceptance.loadtest.posters.model.components.general.LocaleSwitcher;
 import com.xceptance.loadtest.posters.model.components.general.MiniCart;
 import com.xceptance.loadtest.posters.model.components.general.Navigation;
+import com.xceptance.loadtest.posters.model.components.general.SearchBar;
 import com.xceptance.loadtest.posters.model.components.general.User;
 
 /**
@@ -22,6 +23,8 @@ public class GeneralPage implements PageInterface
 
     public User user = new User();
 
+    public SearchBar searchBar = new SearchBar();
+
     public Navigation navigation = new Navigation();
 
     public LocaleSwitcher localeSwitcher = new LocaleSwitcher();
@@ -33,6 +36,7 @@ public class GeneralPage implements PageInterface
     {
         miniCart.validate();
         user.validate();
+        searchBar.validate();
         navigation.validate();
         footer.validate();
         localeSwitcher.validate();
@@ -41,21 +45,7 @@ public class GeneralPage implements PageInterface
     @Override
     public boolean is()
     {
-        return miniCart.exists() && user.exists() && navigation.exists() && localeSwitcher.exists() && footer.exists();
+        return miniCart.exists() && user.exists() && searchBar.exists() && navigation.exists() && localeSwitcher
+                .exists() && footer.exists();
     }
-
-	public static void search(final String phrase, final String expectedCount)
-	{
-		Action.run("Search", () ->
-		{
-			// enter phrase
-			$("#header-search-form .form-control").sendKeys(phrase);
-
-			// send search, this is our page load
-			$("#header-search-button").click();
-
-			// verify count
-			$("#total-product-count").should(Condition.exactText(expectedCount));
-		});
-	}
 }

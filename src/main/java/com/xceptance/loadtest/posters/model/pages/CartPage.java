@@ -14,13 +14,16 @@ public class CartPage extends GeneralPage
 
     // TODO Components associated with the cart page
 
+    @Override
     public void validate()
     {
+        super.validate();
         Selenide.$(LOCATOR).should(Condition.exist);
     }
 
+    @Override
     public boolean is()
     {
-        return Selenide.$(LOCATOR).exists();
+        return Selenide.$(LOCATOR).exists() && super.is();
     }
 }

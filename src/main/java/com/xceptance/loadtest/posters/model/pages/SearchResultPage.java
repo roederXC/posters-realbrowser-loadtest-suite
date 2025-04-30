@@ -1,7 +1,10 @@
 package com.xceptance.loadtest.posters.model.pages;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+
+import com.codeborne.selenide.Selenide;
 
 /**
  * Does things on a search result page
@@ -11,6 +14,8 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class SearchResultPage extends GeneralPage
 {
+    public static final String LOCATOR = "#main #title-search-text";
+
 	/**
 	 * Check that the homepage is correct. This activity has to be in the action to get the failure
 	 * properly reported later on in case this verification fails.
@@ -30,4 +35,11 @@ public class SearchResultPage extends GeneralPage
 		// check footer
 		$("#footer").exists();
 	}
+
+    @Override
+    public void validate()
+    {
+        super.validate();
+        Selenide.$(LOCATOR).should(exist);
+    }
 }

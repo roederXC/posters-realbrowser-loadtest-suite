@@ -22,7 +22,7 @@ public class TSearch extends LoadTestCase
     	// search, get some data first, feel free to replace the Tuple approach for the return 
     	// value if this seems to fancy or stubborn or is not needed
     	var data = FileDataSupplier.searchPhraseWithResult();
-    	GeneralPage.search(data.valueA, data.valueB);
+        homepage.searchBar.search(data.valueA, data.valueB);
     	
     	// view a product, this logic here expects that we have a product!
     	SearchResultPage.pdp();
