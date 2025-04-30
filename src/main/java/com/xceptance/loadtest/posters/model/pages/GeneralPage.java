@@ -1,10 +1,7 @@
 package com.xceptance.loadtest.posters.model.pages;
 
-import static com.codeborne.selenide.Selenide.$;
 
-import com.codeborne.selenide.Condition;
 import com.xceptance.loadtest.api.pages.PageInterface;
-import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.posters.model.components.general.Footer;
 import com.xceptance.loadtest.posters.model.components.general.LocaleSwitcher;
 import com.xceptance.loadtest.posters.model.components.general.MiniCart;
