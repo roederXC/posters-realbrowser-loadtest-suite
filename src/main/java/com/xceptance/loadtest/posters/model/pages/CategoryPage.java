@@ -7,12 +7,12 @@ import com.codeborne.selenide.Selenide;
 /**
  * Does things on a search result page
  * 
- * @author rschwietzke
+ * @author Xceptance Software Technologies
  *
  */
-public class SearchResultPage extends ProductListingPage
+public class CategoryPage extends ProductListingPage
 {
-    public static final String LOCATOR = "#main #title-search-text";
+    public static final String LOCATOR = "#title-category-name";
 
     @Override
     public void validate()

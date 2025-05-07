@@ -2,7 +2,6 @@ package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
 import com.xceptance.loadtest.posters.data.FileDataSupplier;
-import com.xceptance.loadtest.posters.model.pages.GeneralPage;
 import com.xceptance.loadtest.posters.model.pages.Homepage;
 import com.xceptance.loadtest.posters.model.pages.SearchResultPage;
 
@@ -22,9 +21,9 @@ public class TSearch extends LoadTestCase
     	// search, get some data first, feel free to replace the Tuple approach for the return 
     	// value if this seems to fancy or stubborn or is not needed
     	var data = FileDataSupplier.searchPhraseWithResult();
-        homepage.searchBar.search(data.valueA, data.valueB);
+        SearchResultPage searchResultPage = homepage.searchBar.search(data.valueA, data.valueB);
     	
     	// view a product, this logic here expects that we have a product!
-    	SearchResultPage.pdp();
+        searchResultPage.clickProduct();
     }
 }
