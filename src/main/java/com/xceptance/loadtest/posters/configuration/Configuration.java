@@ -151,10 +151,6 @@ public class Configuration
     @Property(key = "browsing.flow.categories.flow")
     public ConfigRange browseCategoriesFlow;
 
-    // How often do we refine within the larger browse flow per round
-    @Property(key = "browsing.flow.refine.flow")
-    public ConfigRange browseRefineFlow;
-
     // Top category browsing probability
     @Property(key = "browsing.category.top", immutable = false)
     public ConfigProbability topCategoryBrowsing;
