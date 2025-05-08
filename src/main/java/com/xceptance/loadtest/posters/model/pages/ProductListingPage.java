@@ -1,5 +1,7 @@
 package com.xceptance.loadtest.posters.model.pages;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.posters.model.components.plp.ProductGrid;
 
@@ -19,9 +21,13 @@ public class ProductListingPage extends GeneralPage
 	{
         ProductDetailPage pdp = new ProductDetailPage();
 
-        Action.run("ClickCategory", () ->
+        Action.run("ClickProduct", () ->
         {
-            productgrid.getRandomProductLink().click();
+            SelenideElement productLink = productgrid.getRandomProductLink();
+
+            productLink.should(Condition.exist).scrollTo().shouldBe(Condition.visible);
+
+            productLink.click();
 
             pdp.validate();
         });

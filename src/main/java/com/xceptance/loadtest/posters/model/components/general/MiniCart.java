@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
+import org.junit.Assert;
+
 /**
  * Mini cart component.
  *
@@ -51,5 +53,29 @@ public class MiniCart implements SelenideComponent
         cartPage.validate();
 
         return cartPage;
+    }
+
+    public int getTotalQuantity()
+    {
+        // Even on empty cart, the mini cart quantity element is available (but has no
+        // text assigned)
+        String text = getTotalQuantityElement().getText().trim();
+        if (!text.isEmpty())
+        {
+            try
+            {
+                return Integer.parseInt(text);
+            } catch (NumberFormatException ignored)
+            {
+                Assert.fail("Failed to interpret mini cart total");
+            }
+        }
+
+        return 0;
+    }
+
+    private SelenideElement getTotalQuantityElement()
+    {
+        return locate().$(".header-cart-product-count");
     }
 }

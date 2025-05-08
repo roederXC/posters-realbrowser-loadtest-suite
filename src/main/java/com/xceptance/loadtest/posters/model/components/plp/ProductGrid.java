@@ -36,8 +36,7 @@ public class ProductGrid implements SelenideComponent
 
     public SelenideElement getRandomProductLink()
     {
-        SelenideElement product = SelenideUtil.chooseRandomly(getProductLinks(), 1).should(Condition.exist).scrollTo()
-                .shouldBe(Condition.visible);
+        SelenideElement product = SelenideUtil.chooseRandomly(getProductLinks(), 1);
 
         return product;
     }
