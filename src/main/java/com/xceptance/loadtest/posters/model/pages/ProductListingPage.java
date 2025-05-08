@@ -3,6 +3,8 @@ package com.xceptance.loadtest.posters.model.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
+import com.xceptance.loadtest.posters.model.components.plp.PLPNavigation;
 import com.xceptance.loadtest.posters.model.components.plp.ProductGrid;
 
 /**
@@ -13,9 +15,9 @@ import com.xceptance.loadtest.posters.model.components.plp.ProductGrid;
  */
 public class ProductListingPage extends GeneralPage
 {
-    public static final String LOCATOR = "#product-overview";
-
     public ProductGrid productgrid = new ProductGrid();
+
+    public PLPNavigation plpNavigation = new PLPNavigation();
 
     public ProductDetailPage clickProduct()
 	{
@@ -34,6 +36,14 @@ public class ProductListingPage extends GeneralPage
 
         return pdp;
 	}
+
+    public void paging()
+    {
+        if (plpNavigation.exists() && Context.configuration().displayMoreProbability.random())
+        {
+            plpNavigation.getRandomAvailablePageLink().scrollTo().shouldBe(Condition.visible).click();
+        }
+    }
 
     @Override
     public void validate()

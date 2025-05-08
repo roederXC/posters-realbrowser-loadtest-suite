@@ -142,10 +142,6 @@ public class Configuration
 
     // ==========================================================
     // Browsing
-    
-    // How often do we want to walk the catalog path from the top
-    @Property(key = "browsing.flow")
-    public ConfigRange fullBrowseFlow;
 
     // How often do we need the categories touched per browsing flow before refining
     @Property(key = "browsing.flow.categories.flow")

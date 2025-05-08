@@ -1,6 +1,7 @@
 package com.xceptance.loadtest.posters.tests;
 
 import com.xceptance.loadtest.api.tests.LoadTestCase;
+import com.xceptance.loadtest.posters.model.flows.BrowsingFlow;
 import com.xceptance.loadtest.posters.model.pages.CategoryPage;
 import com.xceptance.loadtest.posters.model.pages.Homepage;
 import com.xceptance.loadtest.posters.model.pages.ProductDetailPage;
@@ -18,11 +19,9 @@ public class TAddToCart extends LoadTestCase
         Homepage homepage = new Homepage();
         homepage.open();
     	
-        CategoryPage topCategoryPage = homepage.navigation.clickTopCategory();
+        new BrowsingFlow(homepage).run();
 
-        CategoryPage categoryPage = topCategoryPage.navigation.clickCategory();
-
-        ProductDetailPage pdp = categoryPage.clickProduct();
+        ProductDetailPage pdp = new CategoryPage().clickProduct();
 
         pdp.addToCart();
     }

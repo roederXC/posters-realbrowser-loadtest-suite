@@ -37,7 +37,7 @@ public class Navigation implements SelenideComponent
         {
             ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
 
-            SelenideUtil.chooseRandomly(topCategories, 1).click();
+            SelenideUtil.chooseRandomly(topCategories, 1).scrollTo().click();
 
             topCategoryPage.validate();
         });
@@ -59,7 +59,7 @@ public class Navigation implements SelenideComponent
 
             ElementsCollection categories = $(topCategory).$$("ul.dropdown-menu > li");
 
-            SelenideUtil.chooseRandomly(categories, 1).click();
+            SelenideUtil.chooseRandomly(categories, 1).scrollTo().click();
 
             categoryPage.validate();
         });
