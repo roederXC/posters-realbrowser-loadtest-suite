@@ -1,2 +1,5 @@
 bear,3
-german,14
+german,10
+sweden, 4
+flowers, 6
+snow, 6

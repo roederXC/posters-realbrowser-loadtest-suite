@@ -22,6 +22,6 @@ public class TBrowse extends LoadTestCase
 
         CategoryPage categoryPage = topCategoryPage.navigation.clickCategory();
 
-        ProductDetailPage pdp = categoryPage.clickProduct();
+        categoryPage.clickProduct();
     }
 }
