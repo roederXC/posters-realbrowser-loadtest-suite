@@ -1,7 +1,13 @@
 package com.xceptance.loadtest.posters.model.pages;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.posters.model.components.cart.CartTable;
 
 /**
@@ -11,9 +17,11 @@ import com.xceptance.loadtest.posters.model.components.cart.CartTable;
  */
 public class CartPage extends GeneralPage
 {
+    CartTable cartTable = new CartTable();
+
     public static final String LOCATOR = "#cart-title";
 
-    CartTable cartTable = new CartTable();
+    private final String CHECKOUTBUTTONLOCATOR = "#btn-start-checkout";
 
     @Override
     public void validate()
@@ -26,5 +34,25 @@ public class CartPage extends GeneralPage
     public boolean is()
     {
         return Selenide.$(LOCATOR).exists() && super.is();
+    }
+
+    public CheckoutPage goToCheckout()
+    {
+        final SelenideElement checkoutButton = $(CHECKOUTBUTTONLOCATOR);
+
+        CheckoutPage checkoutPage = new CheckoutPage();
+
+        // Click checkout button
+        Action.run("ClickCheckoutButton", () ->
+        {
+            // Bring checkout button into view
+            checkoutButton.should(exist).scrollIntoView(true).shouldBe(visible);
+            // Click the checkout button
+            checkoutButton.click();
+
+            checkoutPage.validate();
+        });
+
+        return checkoutPage;
     }
 }

@@ -24,4 +24,9 @@ public class ProgressIndicator implements SelenideComponent
     {
         locate().should(Condition.exist);
     }
+
+    public void validateStep(int step)
+    {
+        locate().$(".progress-indicator.progress-" + String.valueOf(step)).should(Condition.exist);
+    }
 }
