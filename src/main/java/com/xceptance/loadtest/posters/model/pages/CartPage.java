@@ -2,6 +2,7 @@ package com.xceptance.loadtest.posters.model.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.xceptance.loadtest.posters.model.components.cart.CartTable;
 
 /**
  * Representation of the cart page.
@@ -10,9 +11,9 @@ import com.codeborne.selenide.Selenide;
  */
 public class CartPage extends GeneralPage
 {
-    public static final String LOCATOR = "#titleCart";
+    public static final String LOCATOR = "#cart-title";
 
-    // TODO Components associated with the cart page
+    CartTable cartTable = new CartTable();
 
     @Override
     public void validate()

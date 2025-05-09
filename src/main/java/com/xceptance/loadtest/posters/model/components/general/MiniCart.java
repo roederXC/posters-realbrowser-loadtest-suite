@@ -47,7 +47,7 @@ public class MiniCart implements SelenideComponent
         showPopUp();
 
         Context.startAction("OpenCartPage");
-        locate().$("a.go-to-cart[href*='/cart']").shouldBe(visible).click();
+        $("#mini-cart-menu a.go-to-cart").shouldBe(visible).click();
 
         CartPage cartPage = new CartPage();
         cartPage.validate();
