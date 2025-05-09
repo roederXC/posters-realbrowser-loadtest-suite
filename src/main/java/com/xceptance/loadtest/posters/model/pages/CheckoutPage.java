@@ -12,9 +12,9 @@ import com.xceptance.loadtest.posters.model.components.checkout.ProgressIndicato
  */
 public class CheckoutPage implements PageInterface
 {
-    ProgressIndicator progressIndicator = new ProgressIndicator();
+    public ProgressIndicator progressIndicator = new ProgressIndicator();
 
-    AddressForm addressForm = new AddressForm();
+    public AddressForm addressForm = new AddressForm();
 
     public static final String LOCATOR = "#checkout-progress-indicator";
 

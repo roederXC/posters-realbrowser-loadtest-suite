@@ -1,9 +1,12 @@
 package com.xceptance.loadtest.posters.tests;
 
+import com.xceptance.loadtest.api.data.Account;
 import com.xceptance.loadtest.api.tests.LoadTestCase;
+import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.flows.BrowsingFlow;
 import com.xceptance.loadtest.posters.model.pages.CartPage;
 import com.xceptance.loadtest.posters.model.pages.CategoryPage;
+import com.xceptance.loadtest.posters.model.pages.CheckoutPage;
 import com.xceptance.loadtest.posters.model.pages.Homepage;
 import com.xceptance.loadtest.posters.model.pages.ProductDetailPage;
 
@@ -15,6 +18,8 @@ public class TGuestOrder extends LoadTestCase
      */
     public void test()
     {
+        Account account = Context.get().data.attachAccount().get();
+
     	// loads the homepage, data needed is taking from the properties automatically
     	// using the Context as well as the attached configuration.
         Homepage homepage = new Homepage();
@@ -28,6 +33,8 @@ public class TGuestOrder extends LoadTestCase
 
         CartPage cartPage = pdp.miniCart.openCartPage();
 
-        cartPage.goToCheckout();
+        CheckoutPage checkoutPage = cartPage.goToCheckout();
+
+        checkoutPage.addressForm.fillContactInformation(account);
     }
 }

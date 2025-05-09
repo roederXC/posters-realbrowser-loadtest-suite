@@ -3,6 +3,8 @@ package com.xceptance.loadtest.posters.model.components.checkout;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
+import com.xceptance.loadtest.api.data.Account;
+import com.xceptance.loadtest.api.util.Context;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -24,25 +26,25 @@ public class AddressForm implements SelenideComponent
     {
         locate().should(Condition.exist);
     }
+    
+    public void fillContactInformation(Account account)
+    {
+        locate().$("#address-last-name").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.lastname);
+        locate().$("#address-first-name").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.firstname);
+        locate().$("#address-address-line").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.shippingAddress.addressLine1);
+        locate().$("#address-city").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.shippingAddress.city);
+        locate().$("#address-state").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.shippingAddress.state);
+        locate().$("#address-zip").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .sendKeys(account.shippingAddress.zip);
+        locate().$("#address-country").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .selectOptionContainingText(account.shippingAddress.country);
 
-//  public void fillJobName()
-//  {
-//      Context.get().startAction("CheckoutFillJobName", "JS");
-//      $("#job").should(exist).sendKeys("Job Name " + RandomStringUtils.randomAlphabetic(5));
-//  }
-//
-//  public void fillPONumber()
-//  {
-//      Context.get().startAction("CheckoutFillPONumber");
-//      $("#po").should(exist).sendKeys("PO Number " + RandomStringUtils.randomAlphabetic(5));
-//  }
-//
-//  public void fillContactInformation(String fullName, String mobilePhoneNumber)
-//  {
-//      $("#full-name").should(exist).scrollTo().shouldBe(visible).sendKeys(fullName);
-//      $("#phone-guest").should(exist).sendKeys(mobilePhoneNumber);
-//
-//      // Screenshot
-//      Context.get().startAction("CheckoutFillContactInformation", "JS");
-//  }
+        // Screenshot
+        Context.startAction("CheckoutFillShipping");
+    }
 }
