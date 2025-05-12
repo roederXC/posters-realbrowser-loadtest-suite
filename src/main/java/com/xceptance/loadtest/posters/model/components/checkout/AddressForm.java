@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
 import com.xceptance.loadtest.api.data.Account;
 import com.xceptance.loadtest.api.util.Context;
+import com.xceptance.loadtest.posters.model.pages.CheckoutPage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -46,5 +47,17 @@ public class AddressForm implements SelenideComponent
 
         // Screenshot
         Context.startAction("CheckoutFillShipping");
+    }
+
+    public CheckoutPage submitAddress()
+    {
+        Context.startAction("CheckoutSubmitShippingAddress");
+        locate().$("#button-add-shipping-address").should(Condition.exist).scrollTo().shouldBe(Condition.visible)
+                .click();
+
+        CheckoutPage checkoutPage = new CheckoutPage();
+        checkoutPage.progressIndicator.validateStep(4);
+
+        return checkoutPage;
     }
 }

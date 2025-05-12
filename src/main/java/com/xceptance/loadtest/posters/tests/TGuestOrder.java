@@ -36,5 +36,6 @@ public class TGuestOrder extends LoadTestCase
         CheckoutPage checkoutPage = cartPage.goToCheckout();
 
         checkoutPage.addressForm.fillContactInformation(account);
+        checkoutPage.addressForm.submitAddress();
     }
 }
