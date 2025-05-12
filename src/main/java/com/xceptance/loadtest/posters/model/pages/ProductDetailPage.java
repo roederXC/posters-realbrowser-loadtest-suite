@@ -1,13 +1,11 @@
 package com.xceptance.loadtest.posters.model.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-
-import org.junit.Assert;
 
 /**
  * Representation of the homepage.
@@ -49,16 +47,16 @@ public class ProductDetailPage extends GeneralPage
         }
 
         // Click add to cart button
-        Action.run("ClickAddToCart", () ->
-        {
-            // Bring add to cart button into view
-            addToCartButton.should(exist).scrollIntoView(true).shouldBe(visible);
-            // Click the Add to Cart button
-            addToCartButton.click();
-        });
+        Context.startAction("ClickAddToCart");
+        // Bring add to cart button into view
+        addToCartButton.should(exist).scrollIntoView(true).shouldBe(visible);
+        // Click the Add to Cart button
+        addToCartButton.click();
+        miniCart.viewCartButton.validate();
 
-        // We check if new product count is higher then before
-        Assert.assertTrue(productCountBefore < miniCart.getTotalQuantity());
+//        // We check if new product count is higher then before
+//        Assert.assertTrue("The number of products in cart has not increased.", productCountBefore < miniCart
+//                .getTotalQuantity());
 
         return true;
     }

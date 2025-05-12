@@ -3,7 +3,7 @@ package com.xceptance.loadtest.posters.model.components.general;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
-import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.pages.SearchResultPage;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -31,20 +31,17 @@ public class SearchBar implements SelenideComponent
     {
         SearchResultPage searchResultPage = new SearchResultPage();
 
-        Action.run("Search", () ->
-        {
-            // enter phrase
-            $("#header-search-form .form-control").sendKeys(phrase);
+        Context.startAction("Search");
+        // enter phrase
+        $("#header-search-form .form-control").sendKeys(phrase);
 
-            // send search, this is our page load
-            $("#header-search-button").click();
+        // send search, this is our page load
+        $("#header-search-button").click();
 
-            searchResultPage.validate();
+        searchResultPage.validate();
 
-            // verify count
-            $("#total-product-count").should(Condition.exactText(expectedCount));
-
-        });
+        // verify count
+        $("#total-product-count").should(Condition.exactText(expectedCount));
 
         return searchResultPage;
     }

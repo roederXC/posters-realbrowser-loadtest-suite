@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
-import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.api.util.SelenideUtil;
 import com.xceptance.loadtest.posters.model.pages.CategoryPage;
 
@@ -33,14 +33,12 @@ public class Navigation implements SelenideComponent
     {
         CategoryPage topCategoryPage = new CategoryPage();
 
-        Action.run("ClickTopCategory", () ->
-        {
-            ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
+        Context.startAction("ClickTopCategory");
+        ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
 
-            SelenideUtil.chooseRandomly(topCategories, 1).scrollTo().click();
+        SelenideUtil.chooseRandomly(topCategories, 1).scrollTo().click();
 
-            topCategoryPage.validate();
-        });
+        topCategoryPage.validate();
 
         return topCategoryPage;
     }
@@ -49,20 +47,19 @@ public class Navigation implements SelenideComponent
     {
         CategoryPage categoryPage = new CategoryPage();
 
-        Action.run("ClickCategory", () ->
-        {
-            ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
+        Context.startAction("ClickCategory");
 
-            SelenideElement topCategory = SelenideUtil.chooseRandomly(topCategories, 1);
+        ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
 
-            topCategory.hover();
+        SelenideElement topCategory = SelenideUtil.chooseRandomly(topCategories, 1);
 
-            ElementsCollection categories = $(topCategory).$$("ul.dropdown-menu > li");
+        topCategory.hover();
 
-            SelenideUtil.chooseRandomly(categories, 1).scrollTo().click();
+        ElementsCollection categories = $(topCategory).$$("ul.dropdown-menu > li");
 
-            categoryPage.validate();
-        });
+        SelenideUtil.chooseRandomly(categories, 1).scrollTo().click();
+
+        categoryPage.validate();
 
         return categoryPage;
     }

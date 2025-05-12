@@ -2,13 +2,12 @@ package com.xceptance.loadtest.posters.model.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.components.plp.PLPNavigation;
 import com.xceptance.loadtest.posters.model.components.plp.ProductGrid;
 
 /**
- * Does things on a search result page
+ * Does things on a product landing page
  * 
  * @author Xceptance Software Technologies
  *
@@ -23,16 +22,12 @@ public class ProductListingPage extends GeneralPage
 	{
         ProductDetailPage pdp = new ProductDetailPage();
 
-        Action.run("ClickProduct", () ->
-        {
-            SelenideElement productLink = productgrid.getRandomProductLink();
+        Context.startAction("ClickProduct");
 
-            productLink.should(Condition.exist).scrollTo().shouldBe(Condition.visible);
-
-            productLink.click();
-
-            pdp.validate();
-        });
+        SelenideElement productLink = productgrid.getRandomProductLink();
+        productLink.should(Condition.exist).scrollTo().shouldBe(Condition.visible);
+        productLink.click();
+        pdp.validate();
 
         return pdp;
 	}
@@ -41,6 +36,7 @@ public class ProductListingPage extends GeneralPage
     {
         if (plpNavigation.exists() && Context.configuration().displayMoreProbability.random())
         {
+            Context.startAction("Paging");
             plpNavigation.getRandomAvailablePageLink().scrollTo().shouldBe(Condition.visible).click();
         }
     }

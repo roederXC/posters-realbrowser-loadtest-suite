@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.components.cart.CartTable;
 
 /**
@@ -43,15 +43,14 @@ public class CartPage extends GeneralPage
         CheckoutPage checkoutPage = new CheckoutPage();
 
         // Click checkout button
-        Action.run("ClickCheckoutButton", () ->
-        {
-            // Bring checkout button into view
-            checkoutButton.should(exist).scrollIntoView(true).shouldBe(visible);
-            // Click the checkout button
-            checkoutButton.click();
+        Context.startAction("ClickCheckoutButton");
 
-            checkoutPage.validate();
-        });
+        // Bring checkout button into view
+        checkoutButton.should(exist).scrollIntoView(true).shouldBe(visible);
+        // Click the checkout button
+        checkoutButton.click();
+
+        checkoutPage.validate();
 
         return checkoutPage;
     }

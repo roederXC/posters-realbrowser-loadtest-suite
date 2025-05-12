@@ -3,7 +3,7 @@ package com.xceptance.loadtest.posters.model.components.general;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
-import com.xceptance.loadtest.api.util.Action;
+import com.xceptance.loadtest.api.util.Context;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -28,26 +28,22 @@ public class LocaleSwitcher implements SelenideComponent
 
     public void switchToUs()
     {
-        Action.run("SwitchToUS", () ->
-        {
-            locate().hover();
-            $("#locale-menu [href*='US']").click();
+        Context.startAction("SwitchToUS");
+        locate().hover();
+        $("#locale-menu [href*='US']").click();
 
-            // verify active locale
-            locate().should(Condition.exactText("en-US"));
-        });
+        // verify active locale
+        locate().should(Condition.exactText("en-US"));
     }
 
     public void switchToDe()
     {
-        Action.run("SwitchToDE", () ->
-        {
+        Context.startAction("SwitchToDE");
 
-            locate().hover();
-            $("#locale-menu [href*='DE']").click();
+        locate().hover();
+        $("#locale-menu [href*='DE']").click();
 
-            // verify active locale
-            locate().should(Condition.exactText("de-DE"));
-        });
+        // verify active locale
+        locate().should(Condition.exactText("de-DE"));
     }
 }

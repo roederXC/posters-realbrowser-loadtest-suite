@@ -7,7 +7,6 @@ import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.posters.model.pages.CartPage;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.Assert;
@@ -19,6 +18,8 @@ import org.junit.Assert;
  */
 public class MiniCart implements SelenideComponent
 {
+    public ViewCartButton viewCartButton = new ViewCartButton();
+
     @Override
     public SelenideElement locate()
     {
@@ -46,11 +47,7 @@ public class MiniCart implements SelenideComponent
     {
         showPopUp();
 
-        Context.startAction("OpenCartPage");
-        $("#mini-cart-menu a.go-to-cart").shouldBe(visible).click();
-
-        CartPage cartPage = new CartPage();
-        cartPage.validate();
+        CartPage cartPage = viewCartButton.openCartPage();
 
         return cartPage;
     }
