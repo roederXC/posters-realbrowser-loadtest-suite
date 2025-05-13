@@ -40,5 +40,7 @@ public class TGuestOrder extends LoadTestCase
 
         checkoutPage.paymentForm.fillCreditCardInformation(account);
         checkoutPage.paymentForm.submitPayment();
+
+        checkoutPage.orderOverview.placeOrder();
     }
 }

@@ -53,6 +53,7 @@ public class PaymentForm implements SelenideComponent
 
         CheckoutPage checkoutPage = new CheckoutPage();
         checkoutPage.progressIndicator.validateStep(5);
+        checkoutPage.orderOverview.validate();
 
         return checkoutPage;
     }

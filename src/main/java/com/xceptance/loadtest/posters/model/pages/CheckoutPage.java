@@ -2,6 +2,7 @@ package com.xceptance.loadtest.posters.model.pages;
 
 import com.xceptance.loadtest.api.pages.PageInterface;
 import com.xceptance.loadtest.posters.model.components.checkout.AddressForm;
+import com.xceptance.loadtest.posters.model.components.checkout.OrderOverview;
 import com.xceptance.loadtest.posters.model.components.checkout.PaymentForm;
 import com.xceptance.loadtest.posters.model.components.checkout.ProgressIndicator;
 
@@ -17,6 +18,7 @@ public class CheckoutPage implements PageInterface
 
     public AddressForm addressForm = new AddressForm();
     public PaymentForm paymentForm = new PaymentForm();
+    public OrderOverview orderOverview = new OrderOverview();
 
     public static final String LOCATOR = "#checkout-progress-indicator";
 

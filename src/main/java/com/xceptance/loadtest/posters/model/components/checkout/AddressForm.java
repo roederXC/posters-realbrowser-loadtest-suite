@@ -57,6 +57,7 @@ public class AddressForm implements SelenideComponent
 
         CheckoutPage checkoutPage = new CheckoutPage();
         checkoutPage.progressIndicator.validateStep(4);
+        checkoutPage.paymentForm.validate();
 
         return checkoutPage;
     }
