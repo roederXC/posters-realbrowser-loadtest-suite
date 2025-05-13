@@ -37,5 +37,8 @@ public class TGuestOrder extends LoadTestCase
 
         checkoutPage.addressForm.fillContactInformation(account);
         checkoutPage.addressForm.submitAddress();
+
+        checkoutPage.paymentForm.fillCreditCardInformation(account);
+        checkoutPage.paymentForm.submitPayment();
     }
 }

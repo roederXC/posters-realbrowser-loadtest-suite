@@ -51,6 +51,7 @@ public class CartPage extends GeneralPage
         checkoutButton.click();
 
         checkoutPage.validate();
+        checkoutPage.progressIndicator.validateStep(2);
 
         return checkoutPage;
     }
