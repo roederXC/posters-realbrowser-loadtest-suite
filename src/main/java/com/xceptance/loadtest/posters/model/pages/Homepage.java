@@ -3,7 +3,6 @@ package com.xceptance.loadtest.posters.model.pages;
 import static com.codeborne.selenide.Condition.exist;
 
 import com.codeborne.selenide.Selenide;
-import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
 
 /**
@@ -37,24 +36,23 @@ public class Homepage extends GeneralPage
 			if (Context.get().configuration.preloadAuthentication)
 			{
 				// Open home page and authenticate
-				Action.run(NAME + "_Auth", () -> Selenide.open(siteUrl, "", siteUsername, sitePassword));
+                Context.startAction(NAME, "Auth");
+                Selenide.open(siteUrl, "", siteUsername, sitePassword);
 				// we don't check the first load... second is enough and the page might be broken anyway,
 				// hence the later reload
 	
 				// Reopen home page to avoid JS security issue with credentials in URL
-				Action.run(NAME, () -> {
-					Selenide.open(siteUrl);
-					verify();
-				});
+                Context.startAction(NAME);
+                Selenide.open(siteUrl);
+                validate();
+
 			}
 			else
 			{
 				// Simply open the home page and authenticate
-				Action.run(NAME + "_Auth", () -> 
-				{
-					Selenide.open(siteUrl, "", siteUsername, sitePassword);
-					verify();
-				});
+                Context.startAction(NAME, "Auth");
+                Selenide.open(siteUrl, "", siteUsername, sitePassword);
+                validate();
 			}
 		}
 		else 
@@ -66,10 +64,9 @@ public class Homepage extends GeneralPage
 			// finishes within this action block, otherwise it might not be measured or end up in the
 			// next action.
 			// Reopen home page to avoid JS security issue with credentials in URL
-			Action.run(NAME, () -> {
-				Selenide.open(siteUrl);
-				verify();
-			});
+            Context.startAction(NAME);
+            Selenide.open(siteUrl);
+            validate();
 		}
 	}	
 	
@@ -81,7 +78,8 @@ public class Homepage extends GeneralPage
 	 * Every check requires cpu and memory, the more checks, the less scale you get out of a single node
 	 * in terms of concurrent users. Experiment with that.
 	 */
-    public void verify()
+    @Override
+    public void validate()
 	{
         super.validate();
 
