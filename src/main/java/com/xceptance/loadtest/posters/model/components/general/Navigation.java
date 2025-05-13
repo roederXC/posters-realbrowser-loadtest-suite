@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.components.SelenideComponent;
+import com.xceptance.loadtest.api.util.Action;
 import com.xceptance.loadtest.api.util.Context;
 import com.xceptance.loadtest.api.util.SelenideUtil;
 import com.xceptance.loadtest.posters.model.pages.CategoryPage;
@@ -33,12 +34,16 @@ public class Navigation implements SelenideComponent
     {
         CategoryPage topCategoryPage = new CategoryPage();
 
-        Context.startAction("ClickTopCategory");
-        ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
+        // For demonstration purpose , here we use a different way of executing an action.
+        // Using a lambda over the action class makes the code more readable, but also more difficult to debug
+        Action.run("ClickTopCategory", () ->
+            {
+                ElementsCollection topCategories = $(locate()).$$("li.nav-item.dropdown");
 
-        SelenideUtil.chooseRandomly(topCategories, 1).scrollTo().click();
+                SelenideUtil.chooseRandomly(topCategories, 1).scrollTo().click();
 
-        topCategoryPage.validate();
+                topCategoryPage.validate();
+            });
 
         return topCategoryPage;
     }
