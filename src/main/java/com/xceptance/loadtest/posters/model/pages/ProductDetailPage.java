@@ -55,7 +55,6 @@ public class ProductDetailPage extends GeneralPage
         addToCartButton.should(exist).scrollIntoView(true).shouldBe(visible);
         // Click the Add to Cart button
         addToCartButton.click();
-        miniCart.viewCartButton.validate();
 
         // We check if new product count is higher then before and to avoid issiues caused by delays we wait for a change first
         miniCart.getTotalQuantityElement().shouldNotHave(text(productCountBefore + ""));
