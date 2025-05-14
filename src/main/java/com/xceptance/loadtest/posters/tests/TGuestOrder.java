@@ -18,14 +18,14 @@ public class TGuestOrder extends LoadTestCase
      */
     public void test()
     {
+        // For test cases in which we need user data, we have to prepare an account.
         Account account = Context.get().data.attachAccount().get();
 
     	// loads the homepage, data needed is taking from the properties automatically
     	// using the Context as well as the attached configuration.
-        Homepage homepage = new Homepage();
-        homepage.open();
+        new Homepage().open();
     	
-        new BrowsingFlow(homepage).run();
+        new BrowsingFlow().run();
 
         ProductDetailPage pdp = new CategoryPage().clickProduct();
 
