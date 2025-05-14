@@ -17,7 +17,7 @@ import com.xceptance.loadtest.posters.model.components.cart.CartTable;
  */
 public class CartPage extends GeneralPage
 {
-    CartTable cartTable = new CartTable();
+    public CartTable cartTable = new CartTable();
 
     public static final String LOCATOR = "#cart-title";
 

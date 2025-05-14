@@ -2,12 +2,14 @@ package com.xceptance.loadtest.posters.model.components.cart;
 
 import com.codeborne.selenide.*;
 import com.xceptance.loadtest.api.components.SelenideComponent;
+import com.xceptance.loadtest.api.util.Context;
 
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
- * Cart table on cart page.
+ * Cart table on cart page with a bundle of helpers and actions.
  *
  * @author Xceptance Software Technologies
  */
@@ -47,17 +49,12 @@ public class CartTable implements SelenideComponent
 
     public void validateItemWithSkuExists(String sku)
     {
-        $("input[name='remove-item'][data-pid*='" + sku + "']").should(exist);
+        $("button.btn-remove-product[data-id*='" + sku + "']").should(exist);
     }
 
     public void validateItemWithSkuNotExists(String sku)
     {
-        $("input[name='remove-item'][data-pid*='" + sku + "']").shouldNot(exist);
-    }
-
-    public SelenideElement getLineItemsOptions()
-    {
-        return locate().$(".cart-items-options");
+        $("button.btn-remove-product[data-id*='" + sku + "']").shouldNot(exist);
     }
 
     public ElementsCollection getItems()
@@ -65,83 +62,29 @@ public class CartTable implements SelenideComponent
         return locate().$$(ITEMS_LOCATOR);
     }
 
+    /**
+     * Removes the given item from cart in cart table.
+     * 
+     * @param lineItem
+     */
+    public void removeItem(SelenideElement lineItem)
+    {
+        String sku = lineItem.$("button.btn-remove-product[data-id]").getAttribute("data-id");
+        clickRemoveItem(lineItem);
+        confirmRemove();
 
-//    public void clickRemoveItem(SelenideElement lineItem)
-//    {
-//        String sku = lineItem.should(exist).getAttribute("data-pid");
-//
-//        Context.get().startAction("ClickRemoveLineItem");
-//        lineItem.$(".c-product-info__remove-product").should(exist).scrollTo().shouldBe(visible).click();
-//
-//        modalDialog.confirm();
-//
-//        validateItemWithSkuNotExists(sku);
-//    }
-//
-//    public boolean updateItem(SelenideElement lineItem, Integer globalMaxQty)
-//    {
-//        String currQtyStr = lineItem.$(".c-product-quantity__input").should(exist).scrollTo().shouldBe(visible).getAttribute("value");
-//        String maxQtyStr = lineItem.$(".c-product-quantity__input").getAttribute("data-max-orderable-qty");
-//        String dataUnitStr = lineItem.$(".c-product-quantity__input").getAttribute("data-unit");
-//
-//        if(currQtyStr == null || maxQtyStr == null || dataUnitStr == null)
-//        {
-//            // Can not update element, missing information
-//            return false;
-//        }
-//
-//        int currQty, dataUnit;
-//        double maxQty;
-//        try
-//        {
-//            currQty = Integer.parseInt(currQtyStr);
-//            maxQty = Double.parseDouble(maxQtyStr);
-//            dataUnit = Integer.parseInt(dataUnitStr);
-//        }
-//        catch (NumberFormatException nfe)
-//        {
-//            // Ignored
-//            return false;
-//        }
-//
-//        // Adhere to global max quantity limit if defined
-//        if(globalMaxQty != null)
-//        {
-//            maxQty = Math.min(maxQty, globalMaxQty);
-//        }
-//
-//        // Note:
-//        // - We can NOT decrease the quantity to zero.
-//        // - There is a max quantity amount we need to consider.
-//        // - There are data units we need to consider, e.g. quantity needs to be changed in steps of X.
-//        // - We assume the currently selected quantity adheres to the given data unit.
-//
-//        boolean decrease = (currQty > dataUnit) && XltRandom.nextBoolean();
-//
-//        if(!decrease && (maxQty - currQty) < dataUnit)
-//        {
-//            // Cannot increase
-//            return false;
-//        }
-//
-//        int newQty;
-//        if(decrease)
-//        {
-//            int factor = Math.max(1, (int)Math.floor((double)currQty / dataUnit));
-//            newQty = currQty - XltRandom.nextInt(1, factor) * dataUnit;
-//        }
-//        else
-//        {
-//            int factor = Math.max(1, (int)Math.floor((maxQty - currQty) / dataUnit));
-//            newQty = currQty + XltRandom.nextInt(1, factor) * dataUnit;
-//        }
-//
-//        Context.get().startAction((decrease ? "Decrease" : "Increase") + "LineItemQuantity" /*+ newQty*/);
-//        lineItem.$(".c-product-quantity__input").setValue(
-//                SetValueOptions.withText(String.valueOf(newQty)).usingMethod(SetValueMethod.JS));
-//
-//        // Note: We can not validate the change, because the value does only update after a page reload
-//
-//        return true;
-//    }
+        validateItemWithSkuNotExists(sku);
+    }
+
+    private void clickRemoveItem(SelenideElement lineItem)
+    {
+        Context.startAction("ClickRemoveLineItem");
+        lineItem.$("button.btn-remove-product[data-id]").should(exist).scrollTo().shouldBe(visible).click();
+    }
+
+    private void confirmRemove()
+    {
+        Context.startAction("ConfirmRemoveLineItem");
+        $("#button-delete").should(exist).scrollTo().shouldBe(visible).click();
+    }
 }
