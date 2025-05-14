@@ -71,7 +71,7 @@ public class MiniCart implements SelenideComponent
         return 0;
     }
 
-    private SelenideElement getTotalQuantityElement()
+    public SelenideElement getTotalQuantityElement()
     {
         return locate().$(".header-cart-product-count");
     }

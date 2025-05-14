@@ -5,7 +5,10 @@ import com.xceptance.loadtest.api.util.Context;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+
+import org.junit.Assert;
 
 /**
  * Representation of the homepage.
@@ -54,9 +57,9 @@ public class ProductDetailPage extends GeneralPage
         addToCartButton.click();
         miniCart.viewCartButton.validate();
 
-//        // We check if new product count is higher then before
-//        Assert.assertTrue("The number of products in cart has not increased.", productCountBefore < miniCart
-//                .getTotalQuantity());
+        // We check if new product count is higher then before and to avoid issiues caused by delays we wait for a change first
+        miniCart.getTotalQuantityElement().shouldNotHave(text(productCountBefore + ""));
+        Assert.assertTrue("The number of products in cart has not increased.", productCountBefore < miniCart.getTotalQuantity());
 
         return true;
     }
