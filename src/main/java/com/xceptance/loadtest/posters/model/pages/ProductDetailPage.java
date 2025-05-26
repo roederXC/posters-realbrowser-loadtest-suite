@@ -1,10 +1,14 @@
 package com.xceptance.loadtest.posters.model.pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.xceptance.loadtest.api.util.Context;
+import com.xceptance.xlt.api.util.XltRandom;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -61,5 +65,44 @@ public class ProductDetailPage extends GeneralPage
         Assert.assertTrue("The number of products in cart has not increased.", productCountBefore < miniCart.getTotalQuantity());
 
         return true;
+    }
+
+    public void configureProduct()
+    {
+        final SelenideElement sizeVariation = $(LOCATOR).$("#product-detail-form-size-selection");
+        final SelenideElement styleVariation = $(LOCATOR).$("#product-detail-form-style-selection");
+        final SelenideElement quantity = $(LOCATOR).$("#product-detail-form-quantity");
+
+        if (sizeVariation.exists() && sizeVariation.$("option[value]").exists())
+        {
+            ElementsCollection options = sizeVariation.$$("option[value]").filter(not(disabled));
+            int numberOfOptions = options.size();
+
+            sizeVariation.selectOption(XltRandom.nextInt(numberOfOptions));
+
+            // Screenshot
+            Context.startAction("ConfigureSize");
+        }
+
+        if (styleVariation.exists() && styleVariation.$("input[type='radio']").exists())
+        {
+            System.out.println("--------------------------------");
+            ElementsCollection options = styleVariation.$$("input[type='radio']").filter(not(disabled));
+            int numberOfOptions = options.size();
+
+            SelenideElement optionToSelect = options.get(XltRandom.nextInt(numberOfOptions));
+            optionToSelect.click();
+
+            // Screenshot
+            Context.startAction("ConfigureStyle");
+        }
+
+        if (quantity.exists())
+        {
+            quantity.sendKeys(XltRandom.nextInt(0, 3) + "");
+
+            // Screenshot
+            Context.startAction("ConfigureQuantity");
+        }
     }
 }
