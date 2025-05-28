@@ -22,7 +22,7 @@ public class BrowsingFlow implements Flow
         // Execute catalog rounds
         for (int currentRound = 1; currentRound <= plannedRounds; currentRound++)
         {
-            // opens a category or a top category depending on the probability configured in
+            // Opens a category or a top category depending on the probability configured in
             // project.properties
             if (Context.configuration().topCategoryBrowsing.random())
             {

@@ -32,6 +32,10 @@ public class ProductListingPage extends GeneralPage
         return pdp;
 	}
 
+    /**
+     * When paging, we navigate through the pages of a product listing page if multiple pages are available and if our probability is true.
+     * The probability is defined in project.properties.
+     */
     public void paging()
     {
         if (plpNavigation.exists() && Context.configuration().displayMoreProbability.random())
